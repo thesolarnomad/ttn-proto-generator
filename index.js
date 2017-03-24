@@ -23,7 +23,7 @@ const argv = yargs
     .example('$0 \\\n  -p ./my/message.proto \\\n  -m com.example.MyMessage')
     .argv;
 
-const tmpFile = path.join(__dirname, 'tmp', 'proto.js');
+const tmpFile = path.join(__dirname, '.tmp', 'proto.js');
 waterfall([
     callback => pbjs.main([
         '--target', 'static-module',
@@ -54,7 +54,7 @@ waterfall([
         }));
         compiler.apply(new webpack.ProgressPlugin());
         compiler.run(function(err, stats) {
-            process.stdout.write(stats.toString({
+            console.log(stats.toString({
                 chunks: false, // Makes the build much quieter
                 colors: true
             }));

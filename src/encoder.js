@@ -1,4 +1,4 @@
-var proto = require('../tmp/proto.js');
+var proto = require('../.tmp/proto.js');
 
 function Encoder(object) {
   return MESSAGE_PATH.encode(MESSAGE_PATH.create(object)).finish();

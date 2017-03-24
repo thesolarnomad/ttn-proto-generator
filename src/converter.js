@@ -1,4 +1,4 @@
-var proto = require('../tmp/proto.js');
+var proto = require('../.tmp/proto.js');
 
 module.exports = function Converter(decoded) {
   return MESSAGE_PATH.toObject(decoded, {

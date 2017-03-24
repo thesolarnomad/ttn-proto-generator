@@ -26,7 +26,7 @@
     "webpack": "^2.3.1"
   },
   "scripts": {
-    "pretest": "./index.js -p ./test/test.proto -m com.example.MyMessage -o tmp",
+    "pretest": "./index.js -p ./test/test.proto -m com.example.MyMessage -o .tmp",
     "test": "ava",
     "posttest": "./otto.sh",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"

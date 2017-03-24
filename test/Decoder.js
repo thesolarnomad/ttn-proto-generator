@@ -1,5 +1,5 @@
 import test from 'ava';
-import Decoder from '../tmp/Decoder';
+import Decoder from '../.tmp/Decoder';
 
 test('Decoder', t => {
     t.is(typeof Decoder, 'function');
