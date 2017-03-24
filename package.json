@@ -1,6 +1,6 @@
 {
   "name": "ttn-proto-generator",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "description": "Generator for TTN decoder, validator and converter functions from a given .proto descriptor",
   "bin": "index.js",
   "main": "index.js",
