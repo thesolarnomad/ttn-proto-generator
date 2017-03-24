@@ -1,0 +1,23 @@
+{
+  "name": "ttn-proto-generator",
+  "version": "1.0.0",
+  "description": "Generator for TTN decoder, validator and converter functions from a given .proto descriptor",
+  "main": "index.js",
+  "repository": "git@github.com:thesolarnomad/ttn-proto-generator.git",
+  "author": "Joscha Feth <joscha@feth.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^0.18.2",
+    "eslint": "^3.18.0"
+  },
+  "dependencies": {
+    "async": "^2.1.5",
+    "escodegen": "^1.8.1",
+    "jsdoc": "^3.4.2",
+    "protobufjs": "dcodeIO/protobuf.js#8401a47d030214a54b5ee30426ebc7a9d9c3773d",
+    "tmp": "^0.0.31",
+    "traverse": "^0.6.6",
+    "webpack": "^2.3.1",
+    "webpack-closure-compiler": "^2.1.4"
+  }
+}
