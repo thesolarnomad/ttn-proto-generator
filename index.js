@@ -6,7 +6,6 @@ const waterfall = require('async/waterfall');
 const webpack = require('webpack');
 const pbjs = require('protobufjs/cli/pbjs');
 const webpackConfiguration = require('./webpack.config.js');
-const tmp = require('tmp');
 const argv = yargs
     .usage('Usage: $0 -p [string] -m [string] -o [string]')
     .describe('p', 'The proto definition file')
@@ -24,25 +23,18 @@ const argv = yargs
     .example('$0 \\\n  -p ./my/message.proto \\\n  -m com.example.MyMessage')
     .argv;
 
-tmp.setGracefulCleanup();
-
+const tmpFile = path.join(__dirname, 'tmp', 'proto.js');
 waterfall([
-    callback => tmp.file({
-        dir: path.join(__dirname, 'tmp'),
-        prefix: 'protobufjs-',
-        postfix: '.js'
-    }, callback),
-    (tmpFilePath, fd, cleanupCallback, callback) => pbjs.main([
+    callback => pbjs.main([
         '--target', 'static-module',
         '--wrap', 'commonjs',
-        '--no-create',
         '--no-delimited',
         '--no-comments',
-        '--out', tmpFilePath,
+        '--out', tmpFile,
         argv.protoFile
-    ], (err) => callback(err, tmpFilePath)),
-    (tmpFilePath, callback) => {
-        const proto = require(tmpFilePath);
+    ], (err) => callback(err)),
+    callback => {
+        const proto = require(tmpFile);
         const traversed = traverse(proto);
         if (!traversed.has(argv.message.split('.'))) {
             const availablePaths = traversed.reduce(function(acc) {
@@ -52,12 +44,11 @@ waterfall([
             callback(new Error(`Specified message path "${argv.message}" does not exist. Available paths: ${availablePaths}`));
             return;
         }
-        callback(null, tmpFilePath);
+        callback(null);
     },
-    (tmpFilePath, callback) => {
+    callback => {
         const compiler = webpack(webpackConfiguration({
             outDir: path.resolve(argv.outputDirectory),
-            protoFile: tmpFilePath,
             messagePath: argv.message,
             minify: true,
         }));

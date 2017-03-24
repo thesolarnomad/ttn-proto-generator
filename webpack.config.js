@@ -4,24 +4,21 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = ({
     outDir,
-    protoFile,
     messagePath,
     minify
 }) => ({
-    entry: {
-        'Converter': path.join(__dirname, 'src', 'converter.js'),
-        'Decoder': path.join(__dirname, 'src', 'decoder.js'),
-        'Validator': path.join(__dirname, 'src', 'validator.js'),
-    },
+    entry: ['Encoder', 'Converter', 'Decoder', 'Validator'].reduce((obj, item) => {
+        obj[item] = path.join(__dirname, 'src', `${item.toLowerCase()}.js`);
+        return obj;
+    }, {}),
     output: {
         path: outDir,
         filename: '[name].js',
-        libraryTarget: 'var',
+        libraryTarget: 'umd',
         library: '[name]'
     },
     plugins: [   
         new webpack.DefinePlugin({
-            PROTO_FILE: JSON.stringify(protoFile),
             MESSAGE_PATH: `proto.${messagePath}`,
         }),
         minify && new UglifyJSPlugin()

@@ -1,0 +1,19 @@
+sudo: required
+services:
+  - docker
+language: node_js
+cache:
+  yarn: true
+  directories:
+    - node_modules
+notifications:
+  email: false
+node_js:
+  - '7'
+before_install:
+  - docker pull wala/golang-otto
+after_success:
+  - yarn semantic-release
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
