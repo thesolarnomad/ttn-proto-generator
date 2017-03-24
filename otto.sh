@@ -8,9 +8,4 @@ docker \
     -v `pwd`:`pwd` \
     -w `pwd` \
     wala/golang-otto \
-    cat \
-        `pwd`/.tmp/Encoder.js \
-        `pwd`/.tmp/Validator.js \
-        `pwd`/.tmp/Converter.js \
-        `pwd`/.tmp/Decoder.js \
-        `pwd`/test/_otto.js | otto
+    ./otto_cat.sh
