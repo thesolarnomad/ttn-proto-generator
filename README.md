@@ -1,4 +1,5 @@
 # Generator for Data functions for The Things Network based on protobuf
+[![Build Status](https://travis-ci.org/thesolarnomad/ttn-proto-generator.svg?branch=master)](https://travis-ci.org/thesolarnomad/ttn-proto-generator)
 
 ## Installation
 
