@@ -12,6 +12,8 @@ node_js:
   - '7'
 before_install:
   - docker pull wala/golang-otto
+script:
+  - yarn test
 after_success:
   - yarn semantic-release
 branches:
