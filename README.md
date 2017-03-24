@@ -1,5 +1,16 @@
 # Generator for Data functions for The Things Network based on protobuf
 
+## Installation
+
+```
+npm install -g ttn-proto-generator
+```
+or
+```
+yarn global ttn-proto-generator
+```
+
+## API
 ```
 Usage: ttn-proto-generator -p [string] -m [string] -o [string]
 
