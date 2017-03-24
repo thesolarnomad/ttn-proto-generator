@@ -1,11 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
-const ClosureCompilerPlugin = require('webpack-closure-compiler');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = ({
     outDir,
     protoFile,
-    messagePath
+    messagePath,
+    minify
 }) => ({
     entry: {
         'Converter': path.join(__dirname, 'src', 'converter.js'),
@@ -18,18 +19,11 @@ module.exports = ({
         libraryTarget: 'var',
         library: '[name]'
     },
-    plugins: [
+    plugins: [   
         new webpack.DefinePlugin({
             PROTO_FILE: JSON.stringify(protoFile),
-            MESSAGE_PATH: messagePath,
+            MESSAGE_PATH: `proto.${messagePath}`,
         }),
-        new ClosureCompilerPlugin({
-            compiler: {
-                language_in: 'ECMASCRIPT5',
-                language_out: 'ECMASCRIPT5',
-                compilation_level: 'ADVANCED'
-            },
-            concurrency: 3,
-        })
-    ]
+        minify && new UglifyJSPlugin()
+    ].filter(Boolean)
 });

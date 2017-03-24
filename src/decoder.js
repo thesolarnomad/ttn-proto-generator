@@ -1,5 +1,5 @@
-var decode = require(PROTO_FILE).MESSAGE_PATH.decode;
+var proto = require(PROTO_FILE);
 
-module.exports = function Decoder(bytes, port) {
-    return decode(bytes, bytes.length);
+module.exports = function Decoder(bytes) {
+    return MESSAGE_PATH.decode(bytes, bytes.length);
 };

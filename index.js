@@ -55,20 +55,20 @@ waterfall([
         callback(null, tmpFilePath);
     },
     (tmpFilePath, callback) => {
-        try {
         const compiler = webpack(webpackConfiguration({
             outDir: path.resolve(argv.outputDirectory),
             protoFile: tmpFilePath,
             messagePath: argv.message,
+            minify: true,
         }));
         compiler.apply(new webpack.ProgressPlugin());
         compiler.run(function(err, stats) {
-            console.log(stats);
+            process.stdout.write(stats.toString({
+                chunks: false, // Makes the build much quieter
+                colors: true
+            }));
             callback(err);
         });
-        } catch(e) {
-            console.error(e);
-        }
     }
 ], (err, result) => {
     if (err) {
