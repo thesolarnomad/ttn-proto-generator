@@ -21,7 +21,7 @@
     "estraverse": "^4.2.0",
     "jsdoc": "^3.4.2",
     "minimist": "^1.2.0",
-    "protobufjs": "6.6.3",
+    "protobufjs": "6.11.3",
     "tmp": "0.0.31",
     "traverse": "^0.6.6",
     "uglify-js": "^2.8.15",
